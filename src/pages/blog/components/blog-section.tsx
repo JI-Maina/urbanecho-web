@@ -218,7 +218,7 @@ function BlogHeaderWithSearch() {
       >
         <SearchButton
           type="button"
-          aria-label="Search blog posts"
+          aria-label="Search for an article..."
           onClick={handleFocusSearch}
           onFocus={handleFocusSearch}
           $textColor={searchColors.textColor}

@@ -16,12 +16,20 @@ export const BlogHeader = styled.header`
   align-items: center;
   gap: ${(props) => props.theme.spacing["16"]};
   padding: ${(props) => props.theme.spacing["16"]} 0;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const BlogMasonryArticles = styled.article`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: ${(props) => props.theme.spacing["48"]};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    grid-template-columns: 1fr;
+    gap: ${(props) => props.theme.spacing["24"]};
+  }
 `;
 
 export const BlogsContainer = styled.div`
@@ -72,6 +80,7 @@ export const LoadMoreButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: ${(props) => props.theme.spacing["48"]} 0;
+
 `;
 
 export const SearchWrapper = styled.div<{ 
@@ -92,6 +101,9 @@ export const SearchWrapper = styled.div<{
     $isActive || $hasQuery ? `${theme.spacing["04"]} ${theme.spacing["08"]}` : '0'}; */
     padding: ${(props) => props.theme.spacing["04"]};
     gap: ${(props) => props.theme.spacing["08"]};
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      width: 100%;
+    }
 `;
 
 export const SearchButton = styled.button<{ $textColor: string }>`
