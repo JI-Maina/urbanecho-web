@@ -23,7 +23,7 @@ export const LoginFormLeftSection = styled.div<{
   overflow: hidden;
   height: 736px;
   width: 616px;
-  background-color: ${(props) => props.$bgColor};
+  background-color:#33A59F;
   display: flex;
   justify-content: center;
   padding: ${(props) => props.theme.spacing["48"]};

@@ -18,7 +18,7 @@ export const ScheduleDemoContainer = styled.div`
 
 export const LeftSection = styled.div`
   height: 736px;
-  background-color: #008e87;
+  background-color: #33A59F;
   width: 576px;
   position: relative;
   overflow: hidden;
@@ -52,7 +52,7 @@ export const LeftSection = styled.div`
     gap: ${(props) => props.theme.spacing["24"]};
     h2 {
       ${(props) => props.theme.typography.heading["40/medium"]}
-      background-image: linear-gradient(to right, #F7F7F8, #F7F7F8,#66BBB7);
+      /* background-image: linear-gradient(to right, #F7F7F8, #F7F7F8,#66BBB7); */
       -webkit-background-clip: text; /* For Safari */
       background-clip: text;
       -webkit-text-fill-color: transparent;
