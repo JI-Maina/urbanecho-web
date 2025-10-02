@@ -17,6 +17,11 @@ export const ProductDevDocsSectionContainer = styled.div<{
   margin: 0 auto;
   gap: ${({ theme }) => theme.spacing[24]};
   padding: ${({ theme }) => `${theme.spacing[80]} ${theme.spacing["128"]}`};
+
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    grid-template-columns: 1fr;
+    padding: ${({ theme }) => `${theme.spacing[40]} ${theme.spacing[16]} ${theme.spacing[40]} ${theme.spacing[16]}`};
+  }
   & .left-section-container > h2 {
     ${({ theme }) => theme.typography.heading["40/medium"]}
   }
@@ -26,6 +31,10 @@ export const ProductDevDocsSectionContainer = styled.div<{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: ${({ theme }) => theme.spacing[24]};
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
 
     & .docs-card {
       padding: ${({ theme }) => theme.spacing[24]};

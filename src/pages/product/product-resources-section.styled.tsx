@@ -19,11 +19,18 @@ export const ResourcesContainer = styled.div<{
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing[64]};
-
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    padding: ${({ theme }) =>
+      `${theme.spacing[40]} ${theme.spacing[16]} ${theme.spacing[40]} ${theme.spacing[16]}`};
+    gap: ${({ theme }) => theme.spacing[40]};
+  }
   & > h2 {
     max-width: 74rem; /** 1184px */
     ${({ theme }) => theme.typography.heading["40/medium"]}
     text-align: center;
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      ${({ theme }) => theme.typography.heading["32/medium"]}
+    }
   }
 
   & .resources-content-wrapper {
@@ -34,7 +41,10 @@ export const ResourcesContainer = styled.div<{
     & .cards-container {
       display: flex;
       gap: ${({ theme }) => theme.spacing[24]};
-
+      @media (max-width: ${({ theme: { layout } }) => layout.container.tablet.maxWidth}) {
+        flex-direction: column;
+        gap: ${({ theme }) => theme.spacing[40]};
+      }
       & .resource-card {
         display: flex;
         flex-direction: column;
@@ -45,18 +55,17 @@ export const ResourcesContainer = styled.div<{
         & .badge {
           background-color: ${({ badgeBg }) => badgeBg};
           color: ${({ badgeColor }) => badgeColor};
-          width:fit-content;
+          width: fit-content;
           ${({ theme }) => theme.typography.paragraph["12/400"]}
-           padding: ${({ theme }) => theme.spacing["04"]};
+          padding: ${({ theme }) => theme.spacing["04"]};
         }
         & img {
           height: 20.5rem; /** 328px */
           width: 378.67px;
           object-fit: cover;
-         
         }
-        & h3{
-            ${({ theme }) => theme.typography.heading["20/medium"]}
+        & h3 {
+          ${({ theme }) => theme.typography.heading["20/medium"]}
         }
         & .resource-resource-card-content {
           display: flex;
@@ -68,28 +77,27 @@ export const ResourcesContainer = styled.div<{
       }
     }
 
-    & .resources-cta-container{
+    & .resources-cta-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: ${({ theme }) => theme.spacing[40]};
+      & h2 {
+        max-width: 552px;
+        ${({ theme }) => theme.typography.heading["24/medium"]};
+        text-align: center;
+      }
+      & > div {
         display: flex;
+        flex-direction: column;
+        gap: ${({ theme }) => theme.spacing[24]};
         justify-content: center;
         align-items: center;
-        padding-top: ${({ theme }) => theme.spacing[40]};
-        & h2{
-            max-width:552px;
-            ${({ theme }) => theme.typography.heading["24/medium"]};
-            text-align: center;
-            
+        & button,
+        & a {
+          max-width: 208px;
         }
-        & > div{
-            display: flex;
-            flex-direction: column;
-            gap: ${({ theme }) => theme.spacing[24]};
-            justify-content: center;
-            align-items: center;
-            & button,
-            & a{
-                 max-width:208px;
-            }
-        }
+      }
     }
   }
 `;

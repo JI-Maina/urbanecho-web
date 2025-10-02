@@ -15,12 +15,19 @@ export const ProductUseCaseSectionContainer = styled.div<{
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing[64]};
 
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    padding: ${({ theme }) => `${theme.spacing[64]} ${theme.spacing[16]} ${theme.spacing[40]} ${theme.spacing[16]} `};
+    gap: ${({ theme }) => theme.spacing[40]};
+  }
   & > h2 {
     ${({ theme }) => theme.typography.heading["40/medium"]}
     color: ${(props) => props.headerColor};
     max-width: 58rem; /** 928px */
     text-align: center;
     margin: 0 auto;
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      ${({ theme }) => theme.typography.heading["24/medium"]}
+    }
   }
 `;
 
@@ -28,6 +35,9 @@ export const CaseContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: ${({ theme }) => theme.spacing[24]};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    grid-template-columns: 1fr;
+  }
 `;
 export const CaseCardContainer = styled.div<{
   borderColor: string;
