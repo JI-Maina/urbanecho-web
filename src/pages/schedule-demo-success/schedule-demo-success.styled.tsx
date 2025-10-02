@@ -18,6 +18,9 @@ export const LeftSection = styled.div`
   position: relative;
   overflow: hidden;
   padding: ${(props) => props.theme.spacing["64"]};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    display: none;
+  }
   & .orange-overlay {
     height: 660px;
     width: 660px;
@@ -73,13 +76,9 @@ export const RightSection = styled.div`
   width: 100%;
 `;
 export const ScheduleWrapper = styled.form<{
-  $labelColor: string;
-  $inputColor: string;
-  $controlBorderColor: string;
-  $focusBorderColor: string;
-  $errorBorderColor: string;
-  $errorColor: string;
-  $buttonDisabledBg: string;
+  $iconColor: string;
+  $headerColor: string;
+  $textColor: string;
 }>`
   padding-top: ${(props) => props.theme.spacing["64"]};
   display: flex;
@@ -101,11 +100,16 @@ export const ScheduleWrapper = styled.form<{
     max-width: 640px;
     h2 {
       ${(props) => props.theme.typography.heading["32/medium"]}
+      color: ${(props) => props.$headerColor};
+      @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+        ${({ theme }) => theme.typography.heading["24/medium"]}
+      }
     }
     p {
       ${(props) => props.theme.typography.paragraph["16/400"]}
       max-width: 480px;
-    }
+      color: ${(props) => props.$textColor};
+    }   
   }
 
   .expectation {
@@ -118,6 +122,7 @@ export const ScheduleWrapper = styled.form<{
     h2 {
       ${(props) => props.theme.typography.heading["24/medium"]}
       text-align: center;
+      color: ${(props) => props.$headerColor};
     }
     ul {
       display: flex;
@@ -125,6 +130,7 @@ export const ScheduleWrapper = styled.form<{
       gap: ${(props) => props.theme.spacing["08"]};
       ${(props) => props.theme.typography.paragraph["16/400"]}
       list-style: none;
+      color: ${(props) => props.$textColor};
       li {
         display: flex;
         align-items: center;
@@ -132,6 +138,7 @@ export const ScheduleWrapper = styled.form<{
         .check-icon {
           height: ${(props) => props.theme.spacing["24"]};
           width: ${(props) => props.theme.spacing["24"]};
+          color: ${(props) => props.$iconColor};
         }
       }
     }
@@ -142,6 +149,10 @@ export const ScheduleWrapper = styled.form<{
     gap: ${(props) => props.theme.spacing["16"]};
     max-width: 360px;
     margin: 0 auto;
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      width: 100%;
+      max-width: 100%;
+    }
     & p {
       text-align: center;
       ${(props) => props.theme.typography.label["16/regular"]}
@@ -168,6 +179,9 @@ export const ScheduleWrapper = styled.form<{
     & button {
       width: 360px;
       padding: ${(props) => props.theme.spacing["16"]};
+      @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+        width: 100%;
+      }
     }
   }
 
@@ -175,6 +189,10 @@ export const ScheduleWrapper = styled.form<{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      margin-top: ${(props) => props.theme.spacing["32"]};
+    }
     & .copyright {
     }
     & .privacy {

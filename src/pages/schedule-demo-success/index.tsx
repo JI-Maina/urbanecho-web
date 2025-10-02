@@ -18,20 +18,9 @@ export default function ScheduleDemoSuccess() {
   ];
 
   const colors = {
-    baseBg: useColor("surface.surface-l0"),
-    border: useColor("border.border-subtle"),
-    label: useColor("content.content-tertiary-inverse"),
-    input: useColor("content.content-primary"),
-    header: useColor("content.content-primary"),
-    paragraph: useColor("content.content-tertiary"),
-    buttonDisabled: useColor("background.background-disabled"),
-    errorBorder: useColor("border.border-negative"),
-    errorText: useColor("content.content-negative"),
-    focusBorder: useColor("border.border-focus"),
-    requirementDefault: useColor("content.content-tertiary"),
-    requirementMet: useColor("content.content-positive"),
-    requirementIconPending: useColor("border.border-tertiary"),
-    footerColor: useColor("content.content-tertiary"),
+   iconColor: useColor("content.content-brand"),
+    headerColor: useColor("content.content-primary"),
+    textColor: useColor("content.content-tertiary"),
   };
   return (
     <ScheduleDemoMainPage>
@@ -43,13 +32,9 @@ export default function ScheduleDemoSuccess() {
         </LeftSection>
         <RightSection>
           <ScheduleWrapper
-            $controlBorderColor={colors.border}
-            $inputColor={colors.input}
-            $labelColor={colors.label}
-            $buttonDisabledBg={colors.buttonDisabled}
-            $errorBorderColor={colors.errorBorder}
-            $focusBorderColor={colors.focusBorder}
-            $errorColor={colors.errorText}
+            $iconColor={colors.iconColor}
+            $headerColor={colors.headerColor}
+            $textColor={colors.textColor}
           >
             <div className="content-wrapper">
               <div className="header">
