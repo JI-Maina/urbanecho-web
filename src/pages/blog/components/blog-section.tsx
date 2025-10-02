@@ -1,375 +1,188 @@
-import React, { useState, useMemo } from 'react';
-import { MagnifyingGlass, X, FileText, ArrowDown } from '@phosphor-icons/react';
-import { useColor } from '@/providers/theme-provider';
 import {
-  BlogSectionContainer,
-  BlogContent,
+  BlogMasonryArticles,
   BlogHeader,
-  BlogTitle,
-  SearchContainer,
-  SearchIcon,
-  SearchInput,
-  ClearButton,
-  MasonryGrid,
-  BlogCard,
-  BlogCardImage,
-  BlogCardContent,
-  BlogCardCategory,
-  BlogCardMeta,
-  BlogCardDate,
-  BlogCardReadTime,
-  BlogCardTitle,
-  BlogCardExcerpt,
-  NoResultsContainer,
-  NoResultsText,
-  NoResultsIcon,
-  LoadMoreContainer,
-  LoadMoreButton,
-} from './blog-section.styled';
+  BlogSectionContainer,
+  BlogSectionContent,
+  BlogItemContainer,
+  BlogsContainer,
+  LoadMoreButtonContainer,
+} from "./blog-section.styled";
+import { useColor } from "@/providers/theme-provider";
+import Button from "@/components/ui/button";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
-// Mock blog data - replace with your actual data
-const blogPosts = [
-  {
-    id: 1,
-    title: "How We're Mapping the Future Infrastructure Networks",
-    excerpt: "Discover how our advanced mapping techniques are revolutionizing urban infrastructure planning for sustainable city development.",
-    image: "/images/19354.jpg",
-    height: "200px",
-    category: "How-To",
-    date: "August 30, 2025",
-    readTime: "5 min read"
-  },
-  {
-    id: 2,
-    title: "The Data Behind Bangkok's Urban Transformation",
-    excerpt: "An in-depth look at the data-driven insights transforming Bangkok's urban landscape through innovative analytics.",
-    image: "/images/alex-shuper-bkTH9QrJdFo-unsplash.jpg",
-    height: "180px",
-    category: "Case Study",
-    date: "August 25, 2025",
-    readTime: "7 min read"
-  },
-  {
-    id: 3,
-    title: "From Data to Planning: Urban Analytics in Cities",
-    excerpt: "How cities worldwide are leveraging urban analytics to make informed planning decisions for better communities.",
-    image: "/images/alina-grubnyak-ZiQkhI7417A-unsplash.jpg",
-    height: "220px",
-    category: "Analytics",
-    date: "August 20, 2025",
-    readTime: "6 min read"
-  },
-  {
-    id: 4,
-    title: "A Planner's Guide to Synthetic Population Modelling",
-    excerpt: "Deep dive into the technical aspects of creating synthetic populations for urban simulation and planning.",
-    image: "/images/brain_data.png",
-    height: "160px",
-    category: "How-To",
-    date: "August 30, 2025",
-    readTime: "8 min read"
-  },
-  {
-    id: 5,
-    title: "Streamlining the Concept of a Services Infrastructure",
-    excerpt: "Understanding how services infrastructure can be optimized through data-driven approaches and modern technology.",
-    image: "/images/brainstorming_session.png",
-    height: "240px",
-    category: "Infrastructure",
-    date: "August 15, 2025",
-    readTime: "6 min read"
-  },
-  {
-    id: 6,
-    title: "The Ethical Dimensions of AI in Urban Planning",
-    excerpt: "Exploring the ethical considerations when implementing AI solutions in urban planning and city development.",
-    image: "/images/conny-schneider-s8JOKMUiyo4-unsplash.jpg",
-    height: "190px",
-    category: "Ethics",
-    date: "August 10, 2025",
-    readTime: "9 min read"
-  },
-  {
-    id: 7,
-    title: "Why Humans Behaved Alike During Lockdown",
-    excerpt: "Analyzing human behavior patterns during lockdown periods and their implications for urban planning.",
-    image: "/images/danielle-suijkerbuijk-3lhweEF3nQQ-unsplash.jpg",
-    height: "210px",
-    category: "Research",
-    date: "August 5, 2025",
-    readTime: "7 min read"
-  },
-  {
-    id: 8,
-    title: "Smart City Technologies and Their Impact",
-    excerpt: "How scenario planning and 'what-if' analysis capabilities are transforming urban development strategies.",
-    image: "/images/data-overlay-confused-business-people-office-problem-solving-system-future-technology-hologram-man-women-working-together-programming-code-online-error-digital-agency.jpg",
-    height: "170px",
-    category: "Technology",
-    date: "July 30, 2025",
-    readTime: "8 min read"
-  },
-  {
-    id: 9,
-    title: "Beyond the Gap: The Rise of Digital Urban Planning",
-    excerpt: "Bridging the gap between traditional planning methods and modern digital urban planning solutions.",
-    image: "/images/demographic-census-concept-representation.jpg",
-    height: "200px",
-    category: "Digital Planning",
-    date: "July 25, 2025",
-    readTime: "6 min read"
-  },
-  {
-    id: 10,
-    title: "Data-Driven Urban Development Strategies",
-    excerpt: "Identifying and analyzing the key factors that impact urban development through comprehensive data analysis.",
-    image: "/images/fernando-santander-yjWjLmv13FI-unsplash.jpg",
-    height: "180px",
-    category: "Strategy",
-    date: "July 20, 2025",
-    readTime: "10 min read"
-  },
-  {
-    id: 11,
-    title: "Smart City Planning for Sustainable Communities",
-    excerpt: "Innovative approaches to smart city planning that prioritize sustainable living and community well-being.",
-    image: "/images/full-frame-shot-city.jpg",
-    height: "230px",
-    category: "Sustainability",
-    date: "July 15, 2025",
-    readTime: "7 min read"
-  },
-  {
-    id: 12,
-    title: "Future of Transportation in Smart Cities",
-    excerpt: "Exploring innovative transportation solutions and their integration in modern urban environments.",
-    image: "/images/gints-gailis-dn8xoYmzLZg-unsplash.jpg",
-    height: "195px",
-    category: "Transportation",
-    date: "July 10, 2025",
-    readTime: "8 min read"
-  }
-];
+type BlogKeys = "left" | "center" | "right";
+type BlogPostType = {
+  title: string;
+  tag: string;
+  date: string;
+  height: string;
+  thumbnail: string;
+};
 
-interface BlogCardProps {
-  post: typeof blogPosts[0];
-  onClick: () => void;
-}
+type BlogsType = Record<BlogKeys, BlogPostType[]>;
 
-const BlogCardComponent: React.FC<BlogCardProps> = ({ post, onClick }) => {
-  const bgColor = useColor("surface.surface-l1");
-  const borderColor = useColor("border.border-tertiary");
-  const titleColor = useColor("content.content-primary");
-  const excerptColor = useColor("content.content-secondary");
-  const categoryBgColor = useColor("background.background-brand");
-  const categoryTextColor = useColor("content.content-primary-inverse");
-  const metaTextColor = useColor("content.content-tertiary");
-
-  return (
-    <BlogCard
-      $bgColor={bgColor}
-      $borderColor={borderColor}
-      onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      whileHover={{ y: -4 }}
-    >
-      <BlogCardImage $imageUrl={post.image} $height={post.height} />
-      <BlogCardContent>
-        <BlogCardCategory 
-          $categoryColor={categoryTextColor}
-          $bgColor={categoryBgColor}
-        >
-          {post.category}
-        </BlogCardCategory>
-        
-        <BlogCardMeta>
-          <BlogCardDate $textColor={metaTextColor}>
-            {post.date}
-          </BlogCardDate>
-          <BlogCardReadTime $textColor={metaTextColor}>
-            {post.readTime}
-          </BlogCardReadTime>
-        </BlogCardMeta>
-        
-        <BlogCardTitle $textColor={titleColor}>
-          {post.title}
-        </BlogCardTitle>
-        <BlogCardExcerpt $textColor={excerptColor}>
-          {post.excerpt}
-        </BlogCardExcerpt>
-      </BlogCardContent>
-    </BlogCard>
-  );
+const blogs: BlogsType = {
+  left: [
+    {
+      title: "How Accra Mapped Its Future Transport Network",
+      tag: "Case Study",
+      date: "August 30, 2025",
+      height: "360px",
+      thumbnail: "/images/kofi-bhavnani-4c-k7vendbg-unsplash.jpg",
+    },
+    {
+      title: "A Planner's Guide to Synthetic Population Modelling",
+      tag: "How-To",
+      date: "August 30, 2025",
+      height: "240px",
+      thumbnail: "/images/alex-shuper-bkTH9QrJdFo-unsplash.jpg",
+    },
+    {
+      title: "Why Human Behaviour is the Heart of Urban Tech",
+      tag: "Vision",
+      date: "August 30, 2025",
+      height: "320px",
+      thumbnail: "/images/levi-guzman-zdSoe8za6Hs-unsplash.jpg",
+    },
+    {
+      title: "Beyond the Map: The Rise of Digital Urban Twins",
+      tag: "Innovation",
+      date: "August 30, 2025",
+      height: "440px",
+      thumbnail: "/images/danielle-suijkerbuijk-3lhweEF3nQQ-unsplash.jpg",
+    },
+  ],
+  center: [
+    {
+      title: "The Data Behind Bogotá's Urban Resilience Strategy",
+      tag: "Analysis",
+      date: "August 30, 2025",
+      height: "240px",
+      thumbnail: "/images/random-institute-GkacI-_mGlg-unsplash.jpg",
+    },
+    {
+      title: "Jakarta's Digital Twin: A Five-Month Journey",
+      tag: "Case Study",
+      date: "August 30, 2025",
+      height: "440px",
+      thumbnail: "/images/gints-gailis-dn8xoYmzLZg-unsplash.jpg",
+    },
+    {
+      title: "The Ethical Imperative of AI in City Planning",
+      tag: "Opinion",
+      date: "August 30, 2025",
+      height: "176px",
+      thumbnail: "/images/google-deepmind-XEfyYsUMdR4-unsplash.jpg",
+    },
+    {
+      title: "Measuring Social Equity Through Urban Data Metrics",
+      tag: "How-To",
+      date: "August 30, 2025",
+      height: "320px",
+      thumbnail: "/images/19354.jpg",
+    },
+    {
+      title: "From Static Plans to Living, Breathing Cities",
+      tag: "Vision",
+      date: "August 30, 2025",
+      height: "240px",
+      thumbnail: "/images/brainstorming_session.png",
+    },
+  ],
+  right: [
+    {
+      title: "From Static Plans to Living, Breathing Cities",
+      tag: "Analysis",
+      date: "August 30, 2025",
+      height: "360px",
+      thumbnail: "/images/alina-grubnyak-ZiQkhI7417A-unsplash.jpg",
+    },
+    {
+      title: "Introducing the Concept of a Scenario Marketplace",
+      tag: "Innovation",
+      date: "August 30, 2025",
+      height: "240px",
+      thumbnail: "/images/igor-omilaev-B3u8bcGYMOY-unsplash.jpg",
+    },
+    {
+      title: `Ask the Right "What-If" Questions for Your City`,
+      tag: "How-To",
+      date: "August 30, 2025",
+      height: "440px",
+      thumbnail: "/images/fernando-santander-yjWjLmv13FI-unsplash.jpg",
+    },
+    {
+      title: `São Paulo's Master Plan: A Digital First Approach`,
+      tag: "Case Study",
+      date: "August 30, 2025",
+      height: "440px",
+      thumbnail: "/images/vitor-mendes-stafusa-o3jiiES00cI-unsplash.jpg",
+    },
+  ],
 };
 
 export default function BlogSection() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const [visiblePosts, setVisiblePosts] = useState(6); // Show 6 posts initially
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Colors
-  const bgColor = useColor("surface.surface-l0");
-  const titleColor = useColor("content.content-primary");
-  const borderColor = useColor("border.border-secondary");
-  const searchBgColor = useColor("surface.surface-l1");
-  const iconColor = useColor("content.content-tertiary");
-  const textColor = useColor("content.content-primary");
-  const placeholderColor = useColor("content.content-tertiary");
-  
-  // Load more button colors
-  const loadMoreBgColor = useColor("surface.surface-l1");
-  const loadMoreTextColor = useColor("content.content-brand");
-  const loadMoreHoverBgColor = useColor("background.background-brand");
-  const loadMoreBorderColor = useColor("border.border-brand");
-
-  // Filter posts based on search term
-  const filteredPosts = useMemo(() => {
-    if (!searchTerm.trim()) return blogPosts;
-    
-    return blogPosts.filter(post =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.category.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm]);
-
-  // Posts to display (with pagination)
-  const displayedPosts = useMemo(() => {
-    return filteredPosts.slice(0, visiblePosts);
-  }, [filteredPosts, visiblePosts]);
-
-  // Check if there are more posts to load
-  const hasMorePosts = filteredPosts.length > visiblePosts;
-
-  const handleLoadMore = () => {
-    setIsLoading(true);
-    // Simulate loading delay
-    setTimeout(() => {
-      setVisiblePosts(prev => prev + 6);
-      setIsLoading(false);
-    }, 800);
+  const colors = {
+    cardBorder: useColor("border.border-tertiary"),
+    pageBackground: useColor("surface.surface-l0"),
+    tagBackground: useColor("background.background-selected"),
+    tagTextColor: useColor("content.content-brand"),
+    titleColor: useColor("content.content-primary"),
+    dateColor: useColor("content.content-tertiary"),
+    blogContainerBg: useColor("surface.surface-l0"),
   };
-
-  const handleSearchClick = () => {
-    setIsSearchExpanded(true);
-  };
-
-  const handleSearchBlur = () => {
-    if (!searchTerm.trim()) {
-      setIsSearchExpanded(false);
-    }
-  };
-
-  const handleClearSearch = () => {
-    setSearchTerm('');
-    setIsSearchExpanded(false);
-    setVisiblePosts(6); // Reset pagination
-  };
-
-  const handlePostClick = (postId: number) => {
-    // Navigate to blog post detail - implement your navigation logic here
-    console.log('Navigate to post:', postId);
-  };
-
   return (
-    <BlogSectionContainer $bgColor={bgColor}>
-      <BlogContent>
-        <BlogHeader>
-          <BlogTitle $textColor={titleColor}>
-            Our blog
-          </BlogTitle>
-          
-          <SearchContainer
-            $isExpanded={isSearchExpanded}
-            $borderColor={borderColor}
-            $bgColor={searchBgColor}
-            onClick={!isSearchExpanded ? handleSearchClick : undefined}
-            initial={false}
-            animate={{
-              width: isSearchExpanded ? 400 : 48,
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <SearchIcon
-              $isExpanded={isSearchExpanded}
-              $iconColor={iconColor}
-            >
-              <MagnifyingGlass />
-            </SearchIcon>
-            
-            {isSearchExpanded && (
-              <SearchInput
-                type="text"
-                placeholder="Search articles..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onBlur={handleSearchBlur}
-                autoFocus
-                $textColor={textColor}
-                $placeholderColor={placeholderColor}
-              />
-            )}
-            
-            {isSearchExpanded && searchTerm && (
-              <ClearButton
-                onClick={handleClearSearch}
-                $iconColor={iconColor}
-                type="button"
-              >
-                <X />
-              </ClearButton>
-            )}
-          </SearchContainer>
-        </BlogHeader>
-
-        {displayedPosts.length > 0 ? (
-          <>
-            <MasonryGrid>
-              {displayedPosts.map((post) => (
-                <BlogCardComponent
-                  key={post.id}
-                  post={post}
-                  onClick={() => handlePostClick(post.id)}
-                />
-              ))}
-            </MasonryGrid>
-            
-            {hasMorePosts && (
-              <LoadMoreContainer>
-                <LoadMoreButton
-                  onClick={handleLoadMore}
-                  disabled={isLoading}
-                  $bgColor={loadMoreBgColor}
-                  $textColor={loadMoreTextColor}
-                  $hoverBgColor={loadMoreHoverBgColor}
-                  $borderColor={loadMoreBorderColor}
+    <BlogSectionContainer bgColor={colors.pageBackground}>
+      <BlogSectionContent>
+        <BlogHeaderWithSearch />
+        <BlogMasonryArticles>
+          {Object.keys(blogs).map((key) => (
+            <BlogsContainer key={key}>
+              {blogs[key as BlogKeys].map((blog, index) => (
+                <BlogItemContainer
+                  key={index}
+                  borderColor={colors.cardBorder}
+                  $tagBgColor={colors.tagBackground}
+                  $tagTextColor={colors.tagTextColor}
+                  $dateColor={colors.dateColor}
+                  $titleColor={colors.titleColor}
+                  $blogContainerBg={colors.blogContainerBg}
                 >
-                  {isLoading ? (
-                    "Loading..."
-                  ) : (
-                    <>
-                      Load more
-                      <ArrowDown />
-                    </>
-                  )}
-                </LoadMoreButton>
-              </LoadMoreContainer>
-            )}
-          </>
-        ) : (
-          <NoResultsContainer>
-            <NoResultsIcon $iconColor={iconColor}>
-              <FileText />
-            </NoResultsIcon>
-            <NoResultsText $textColor={textColor}>
-              No articles found for "{searchTerm}"
-            </NoResultsText>
-          </NoResultsContainer>
-        )}
-      </BlogContent>
+                  <img
+                    src={blog.thumbnail}
+                    alt=""
+                    style={{ height: blog.height, width: "100%" }}
+                  />
+                  <div className="content">
+                    <div className="tag-container">
+                      <span>{blog.tag}</span>
+                    </div>
+                    <h2>{blog.title}</h2>
+                    <p>{blog.date}</p>
+                  </div>
+                </BlogItemContainer>
+              ))}
+            </BlogsContainer>
+          ))}
+        </BlogMasonryArticles>
+        <LoadMoreButtonContainer>
+          <Button variant="primary" size="large">
+            Load More
+          </Button>
+        </LoadMoreButtonContainer>
+      </BlogSectionContent>
     </BlogSectionContainer>
+  );
+}
+
+function BlogHeaderWithSearch() {
+  return (
+    <BlogHeader>
+      <h2>Our Blog</h2>
+      <div className="search-bar">
+        <MagnifyingGlassIcon size={20} />
+      </div>
+    </BlogHeader>
   );
 }
