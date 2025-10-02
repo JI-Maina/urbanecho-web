@@ -29,13 +29,23 @@ export const TermsOfServiceSection = styled.section`
   gap: ${(props) => props.theme.spacing["24"]};
   h2 {
     ${(props) => props.theme.typography.heading["24/medium"]}
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      ${({ theme }) => theme.typography.heading["20/medium"]}
+    }
   }
   p {
     ${(props) => props.theme.typography.paragraph["20/400"]}
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      ${({ theme }) => theme.typography.paragraph["16/400"]}
+    }
   }
   ul {
     list-style: disc;
     padding-left: ${(props) => props.theme.spacing["32"]};
      ${(props) => props.theme.typography.paragraph["20/400"]}
+      @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      padding-left: ${(props) => props.theme.spacing["16"]};
+      ${({ theme }) => theme.typography.paragraph["16/400"]}
+     }
   }
 `;
