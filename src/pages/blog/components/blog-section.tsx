@@ -6,10 +6,14 @@ import {
   BlogItemContainer,
   BlogsContainer,
   LoadMoreButtonContainer,
+  SearchWrapper,
+  SearchButton,
+  SearchInput,
 } from "./blog-section.styled";
 import { useColor } from "@/providers/theme-provider";
 import Button from "@/components/ui/button";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
+import { useState, useRef } from "react";
 
 type BlogKeys = "left" | "center" | "right";
 type BlogPostType = {
@@ -177,12 +181,67 @@ export default function BlogSection() {
 }
 
 function BlogHeaderWithSearch() {
+  const [query, setQuery] = useState("");
+  const [isSearchActive, setSearchActive] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const normalizedQuery = query.trim();
+
+  const searchColors = {
+    borderColor: useColor("border.border-subtle"),
+    textColor: useColor("content.content-tertiary"),
+    inputTextColor: useColor("content.content-primary"),
+    placeholderColor: useColor("content.content-tertiary"),
+  };
+
+  const handleFocusSearch = () => {
+    setSearchActive(true);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
+  const handleBlurSearch = () => {
+    // Only retract if there's no query
+    if (!normalizedQuery) {
+      setSearchActive(false);
+    }
+  };
+
   return (
     <BlogHeader>
       <h2>Our Blog</h2>
-      <div className="search-bar">
-        <MagnifyingGlassIcon size={20} />
-      </div>
+      <SearchWrapper 
+        $isActive={isSearchActive} 
+        $hasQuery={!!normalizedQuery}
+        $borderColor={searchColors.borderColor}
+      >
+        <SearchButton
+          type="button"
+          aria-label="Search blog posts"
+          onClick={handleFocusSearch}
+          onFocus={handleFocusSearch}
+          $textColor={searchColors.textColor}
+        >
+          <MagnifyingGlassIcon size={20} />
+        </SearchButton>
+        <SearchInput
+          ref={searchInputRef}
+          type="search"
+          placeholder="Search posts"
+          value={query}
+          onChange={(event) => {
+            setQuery(event.target.value);
+            setSearchActive(true);
+          }}
+          onFocus={() => setSearchActive(true)}
+          onBlur={handleBlurSearch}
+          $isActive={isSearchActive}
+          $hasQuery={!!normalizedQuery}
+          $textColor={searchColors.inputTextColor}
+          $placeholderColor={searchColors.placeholderColor}
+        />
+      </SearchWrapper>
     </BlogHeader>
   );
 }
