@@ -68,8 +68,8 @@ export const LeftSection = styled.div`
   }
 `;
 export const RightSection = styled.div`
-max-width: 752px;
-width: 100%;
+  max-width: 752px;
+  width: 100%;
 `;
 export const ScheduleDemoForm = styled.form<{
   $labelColor: string;
@@ -189,9 +189,25 @@ export const ScheduleDemoForm = styled.form<{
     }
   }
 
-  .privacy-policy-and-copyright {
+  & .privacy-policy-and-copyright {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    & .copyright {
+    }
+    & .privacy {
+      display: flex;
+      gap: ${(props) => props.theme.spacing["24"]};
+      & a {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        gap: ${(props) => props.theme.spacing["08"]};
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 `;

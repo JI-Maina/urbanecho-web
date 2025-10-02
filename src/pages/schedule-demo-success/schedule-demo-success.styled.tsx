@@ -1,217 +1,195 @@
-import styled from 'styled-components';
-import AppTheme from '@/lib/theme';
+import styled from "styled-components";
 
-export const DemoSuccessContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: ${AppTheme.colors['background-primary']};
-  padding: ${AppTheme.spacing['48']} ${AppTheme.spacing['24']};
-`;
+export const ScheduleDemoMainPage = styled.main``;
 
-export const DemoSuccessContent = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${AppTheme.spacing['80']};
-  max-width: 1200px;
+export const ScheduleDemoContainer = styled.div`
+  max-width: ${(props) => props.theme.layout.container.desktop.maxWidth};
   margin: 0 auto;
-  width: 100%;
-
-  @media (max-width: ${AppTheme.layout.breakpoints.tablet}) {
-    flex-direction: column;
-    gap: ${AppTheme.spacing['40']};
-  }
-`;
-
-export const DemoSuccessLeft = styled.div`
-  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: ${(props) => props.theme.spacing["64"]};
+  padding: ${({ theme }) => ` ${theme.spacing["16"]} ${theme.spacing["08"]}`};
 `;
 
-export const DemoSuccessRight = styled.div`
-  flex: 1;
-  max-width: 500px;
-`;
-
-export const DemoSuccessVisual = styled.div`
-  width: 100%;
-  max-width: 400px;
-  height: 300px;
-  background: linear-gradient(135deg, ${AppTheme.colors['background-positive']} 0%, ${AppTheme.colors['background-brand']} 100%);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: ${AppTheme.spacing['24']};
+export const LeftSection = styled.div`
+  height: 736px;
+  background-color: #008e87;
+  width: 576px;
   position: relative;
   overflow: hidden;
+  padding: ${(props) => props.theme.spacing["64"]};
+  & .orange-overlay {
+    height: 660px;
+    width: 660px;
+    background-color: #e19178;
+    border-radius: 50%;
+    background-blend-mode: hard-light;
+    filter: blur(364px);
+    position: absolute;
+    left: -334px;
+    top: -192px;
+  }
+  img {
+    position: absolute;
+    width: 680px;
+    height: 548px;
+    top: 120px;
+    left: -168px;
+  }
 
-  .calendar-icon {
-    width: 100%;
-    height: 100%;
+  & .content {
+    max-width: 416px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .weather-icons {
-    display: flex;
-    gap: ${AppTheme.spacing['12']};
-    margin-bottom: ${AppTheme.spacing['20']};
-    font-size: 20px;
-  }
-
-  .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: ${AppTheme.spacing['08']};
-    width: 200px;
-  }
-
-  .calendar-day {
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-
-    &.active {
-      background: rgba(255, 255, 255, 0.8);
-      transform: scale(1.1);
+    gap: ${(props) => props.theme.spacing["24"]};
+    h2 {
+      ${(props) => props.theme.typography.heading["40/medium"]}
+      background-image: linear-gradient(to right, #F7F7F8, #F7F7F8,#66BBB7);
+      -webkit-background-clip: text; /* For Safari */
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent; /* For other browsers */
+      text-shadow: 0px 0.75px 0.8px #005551cc,
+        /* teal shadow */ 0px -0.5px 0px #ffffff; /* white highlight */
     }
-  }
-`;
-
-export const DemoSuccessHeader = styled.div`
-  margin-bottom: ${AppTheme.spacing['40']};
-`;
-
-export const DemoSuccessTitle = styled.h1`
-  ${AppTheme.typography.heading['32/bold']}
-  color: ${AppTheme.colors['content-primary']};
-  margin-bottom: ${AppTheme.spacing['16']};
-  line-height: 1.3;
-`;
-
-export const DemoSuccessSubtitle = styled.p`
-  ${AppTheme.typography.paragraph['16/400']}
-  color: ${AppTheme.colors['content-secondary']};
-  line-height: 1.6;
-`;
-
-export const DemoSuccessList = styled.div`
-  margin-bottom: ${AppTheme.spacing['40']};
-
-  h4 {
-    ${AppTheme.typography.label['16/semibold']}
-    color: ${AppTheme.colors['content-primary']};
-    margin-bottom: ${AppTheme.spacing['20']};
-  }
-`;
-
-export const DemoSuccessItem = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: ${AppTheme.spacing['12']};
-  margin-bottom: ${AppTheme.spacing['16']};
-  ${AppTheme.typography.paragraph['16/400']}
-  color: ${AppTheme.colors['content-primary']};
-  line-height: 1.5;
-`;
-
-export const DemoSuccessIcon = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: ${AppTheme.colors['background-positive']};
-  color: ${AppTheme.colors['content-primary-inverse']};
-  font-size: 12px;
-  font-weight: bold;
-  flex-shrink: 0;
-  margin-top: 2px;
-`;
-
-export const DemoSuccessButton = styled.button`
-  width: 100%;
-  padding: ${AppTheme.spacing['16']} ${AppTheme.spacing['24']};
-  background: ${AppTheme.colors['background-brand']};
-  color: ${AppTheme.colors['content-primary-inverse']};
-  border: none;
-  border-radius: 8px;
-  ${AppTheme.typography.label['16/semibold']}
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  margin-bottom: ${AppTheme.spacing['24']};
-
-  &:hover:not(:disabled) {
-    background: ${AppTheme.colors['background-brand-hover']};
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-export const DemoSuccessFooter = styled.div`
-  text-align: center;
-
-  &.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: ${AppTheme.spacing['32']};
-    border-top: 1px solid ${AppTheme.colors['border-subtle']};
-    margin-top: ${AppTheme.spacing['48']};
-
-    span {
-      ${AppTheme.typography.paragraph['14/400']}
-      color: ${AppTheme.colors['content-tertiary']};
-    }
-
-    .footer-links {
+    ul {
       display: flex;
-      gap: ${AppTheme.spacing['24']};
+      flex-direction: column;
+      gap: ${(props) => props.theme.spacing["08"]};
+      ${(props) => props.theme.typography.paragraph["16/400"]}
+      list-style: none;
+      li {
+        display: flex;
+        align-items: center;
+        gap: ${(props) => props.theme.spacing["08"]};
+        color: ${(props) => props.theme.primitivesColors.neutral[50].hex};
+      }
+    }
+  }
+`;
+export const RightSection = styled.div`
+  max-width: 752px;
+  width: 100%;
+`;
+export const ScheduleWrapper = styled.form<{
+  $labelColor: string;
+  $inputColor: string;
+  $controlBorderColor: string;
+  $focusBorderColor: string;
+  $errorBorderColor: string;
+  $errorColor: string;
+  $buttonDisabledBg: string;
+}>`
+  padding-top: ${(props) => props.theme.spacing["64"]};
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: ${(props) => props.theme.spacing["40"]};
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: ${(props) => props.theme.spacing["08"]};
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    max-width: 640px;
+    h2 {
+      ${(props) => props.theme.typography.heading["32/medium"]}
+    }
+    p {
+      ${(props) => props.theme.typography.paragraph["16/400"]}
+      max-width: 480px;
+    }
+  }
 
-      a {
-        ${AppTheme.typography.paragraph['14/400']}
-        color: ${AppTheme.colors['content-tertiary']};
-        text-decoration: none;
-        transition: color 0.2s ease-in-out;
-
-        &:hover {
-          color: ${AppTheme.colors['content-brand']};
+  .expectation {
+    display: flex;
+    flex-direction: column;
+    gap: ${(props) => props.theme.spacing["16"]};
+    max-width: 420px;
+    display: flex;
+    margin: 0 auto;
+    h2 {
+      ${(props) => props.theme.typography.heading["24/medium"]}
+      text-align: center;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: ${(props) => props.theme.spacing["08"]};
+      ${(props) => props.theme.typography.paragraph["16/400"]}
+      list-style: none;
+      li {
+        display: flex;
+        align-items: center;
+        gap: ${(props) => props.theme.spacing["08"]};
+        .check-icon {
+          height: ${(props) => props.theme.spacing["24"]};
+          width: ${(props) => props.theme.spacing["24"]};
         }
       }
     }
-
-    @media (max-width: ${AppTheme.layout.breakpoints.tablet}) {
-      flex-direction: column;
-      gap: ${AppTheme.spacing['16']};
+  }
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: ${(props) => props.theme.spacing["16"]};
+    max-width: 360px;
+    margin: 0 auto;
+    & p {
+      text-align: center;
+      ${(props) => props.theme.typography.label["16/regular"]}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .explore-blog-link {
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: ${(props) => props.theme.spacing["16"]};
+        .arrow-left-action-icon {
+          vertical-align: middle;
+          height: ${(props) => props.theme.spacing["20"]};
+          width: ${(props) => props.theme.spacing["20"]};
+          margin-left: ${(props) => props.theme.spacing["08"]};
+        }
+        &:hover {
+          text-decoration: none;
+          background-color: transparent;
+        }
+      }
+    }
+    & button {
+      width: 360px;
+      padding: ${(props) => props.theme.spacing["16"]};
     }
   }
-`;
 
-export const DemoSuccessFooterLink = styled.span`
-  color: ${AppTheme.colors['content-brand']};
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s ease-in-out;
-  ${AppTheme.typography.paragraph['16/400']}
-
-  &:hover {
-    color: ${AppTheme.colors['content-brand-hover']};
-    text-decoration: underline;
+  & .privacy-policy-and-copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & .copyright {
+    }
+    & .privacy {
+      display: flex;
+      gap: ${(props) => props.theme.spacing["24"]};
+      & a {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        gap: ${(props) => props.theme.spacing["08"]};
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 `;

@@ -1,7 +1,106 @@
-import React from 'react'
+import {
+  LeftSection,
+  RightSection,
+  ScheduleDemoContainer,
+  ScheduleWrapper,
+  ScheduleDemoMainPage,
+} from "./schedule-demo-success.styled";
+import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import Button, { LinkButton } from "@/components/ui/button";
+import { useColor } from "@/providers/theme-provider";
+import { Link } from "react-router-dom";
 
 export default function ScheduleDemoSuccess() {
+  const options = [
+    "A personal email from a UrbanEcho solutions expert.",
+    "A brief call to understand your specific challenges.",
+    "A customized demo tailored to your city's needs.",
+  ];
+
+  const colors = {
+    baseBg: useColor("surface.surface-l0"),
+    border: useColor("border.border-subtle"),
+    label: useColor("content.content-tertiary-inverse"),
+    input: useColor("content.content-primary"),
+    header: useColor("content.content-primary"),
+    paragraph: useColor("content.content-tertiary"),
+    buttonDisabled: useColor("background.background-disabled"),
+    errorBorder: useColor("border.border-negative"),
+    errorText: useColor("content.content-negative"),
+    focusBorder: useColor("border.border-focus"),
+    requirementDefault: useColor("content.content-tertiary"),
+    requirementMet: useColor("content.content-positive"),
+    requirementIconPending: useColor("border.border-tertiary"),
+    footerColor: useColor("content.content-tertiary"),
+  };
   return (
-    <div>ScheduleDemoSuccess</div>
-  )
+    <ScheduleDemoMainPage>
+      <ScheduleDemoContainer>
+        <LeftSection>
+          <div className="orange-overlay"></div>
+          <img src="/images/calendar_illustration.png" alt="" />
+          
+        </LeftSection>
+        <RightSection>
+          <ScheduleWrapper
+            $controlBorderColor={colors.border}
+            $inputColor={colors.input}
+            $labelColor={colors.label}
+            $buttonDisabledBg={colors.buttonDisabled}
+            $errorBorderColor={colors.errorBorder}
+            $focusBorderColor={colors.focusBorder}
+            $errorColor={colors.errorText}
+          >
+            <div className="content-wrapper">
+              <div className="header">
+                <h2>You're All Set! Your Demo Request is Confirmed</h2>
+                <p>
+                  Thank you for your interest in UrbanEcho. A member of our team
+                  will contact you within 48 hours to confirm your details and
+                  schedule your personalised demo.
+                </p>
+              </div>
+              <hr />
+              <div className="expectation">
+                <h2>What to expect next:</h2>
+                <ul>
+                  {options.map((option, index) => (
+                    <li key={index}>
+                      <CheckCircleIcon size={20} className="check-icon" /> {option}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <hr />
+              <div className="action-buttons">
+                <Button type="submit" variant="primary">
+                  Book a Demo
+                </Button>
+                <p>
+                  <LinkButton
+                    to="/blog"
+                    variant="secondary"
+                    size="small"
+                    className="explore-blog-link"
+                  >
+                    {" "}
+                    Explore our Blog
+                    <ArrowRightIcon className="arrow-left-action-icon" />
+                  </LinkButton>
+                </p>
+              </div>
+            </div>
+            <div className="privacy-policy-and-copyright">
+              <div className="copyright">© UrbanEcho 2025</div>
+              <div className="privacy">
+                <Link to="/privacy-policy">Privacy Policy</Link>
+
+                <Link to="/terms-of-service">Terms of Service</Link>
+              </div>
+            </div>
+          </ScheduleWrapper>
+        </RightSection>
+      </ScheduleDemoContainer>
+    </ScheduleDemoMainPage>
+  );
 }
