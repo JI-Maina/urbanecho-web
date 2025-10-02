@@ -12,7 +12,7 @@ export const ScheduleDemoContainer = styled.div`
 `;
 
 export const LeftSection = styled.div`
-  height: calc(100vh - 4rem);
+  height: 736px;
   background-color: #008e87;
   width: 576px;
   position: relative;
@@ -32,7 +32,7 @@ export const LeftSection = styled.div`
   img {
     position: absolute;
     width: 880px;
-    bottom: -40px;
+    bottom: -80px;
     left: -380px;
   }
 
@@ -49,8 +49,8 @@ export const LeftSection = styled.div`
       background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent; /* For other browsers */
-      text-shadow: 0px 0.75px 0.8px #005551CC,
-        /* teal shadow */ 0px -0.5px 0px #FFFFFF; /* white highlight */
+      text-shadow: 0px 0.75px 0.8px #005551cc,
+        /* teal shadow */ 0px -0.5px 0px #ffffff; /* white highlight */
     }
     ul {
       display: flex;
@@ -67,7 +67,10 @@ export const LeftSection = styled.div`
     }
   }
 `;
-export const RightSection = styled.div``;
+export const RightSection = styled.div`
+max-width: 752px;
+width: 100%;
+`;
 export const ScheduleDemoForm = styled.form<{
   $labelColor: string;
   $inputColor: string;
@@ -77,11 +80,16 @@ export const ScheduleDemoForm = styled.form<{
   $errorColor: string;
   $buttonDisabledBg: string;
 }>`
+  padding-top: ${(props) => props.theme.spacing["64"]};
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
   .form-inputs {
     display: flex;
     flex-direction: column;
     gap: ${(props) => props.theme.spacing["16"]};
-
+    justify-content: space-between;
     & [data-slot="form-item"] {
       display: flex;
       flex-direction: column;
@@ -134,10 +142,56 @@ export const ScheduleDemoForm = styled.form<{
     display: flex;
     flex-direction: column;
     gap: ${(props) => props.theme.spacing["08"]};
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    h2 {
+      ${(props) => props.theme.typography.heading["32/medium"]}
+    }
+    p {
+      ${(props) => props.theme.typography.paragraph["16/400"]}
+      max-width: 480px;
+    }
   }
   .top-inputs {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: ${(props) => props.theme.spacing["16"]};
+  }
+
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: ${(props) => props.theme.spacing["16"]};
+
+    & p {
+      text-align: center;
+      ${(props) => props.theme.typography.label["16/regular"]}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .login-link {
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: ${(props) => props.theme.spacing["16"]};
+        .arrow-left-action-icon {
+          vertical-align: middle;
+          height: ${(props) => props.theme.spacing["20"]};
+          width: ${(props) => props.theme.spacing["20"]};
+          margin-left: ${(props) => props.theme.spacing["08"]};
+        }
+        &:hover {
+          text-decoration: none;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .privacy-policy-and-copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `;

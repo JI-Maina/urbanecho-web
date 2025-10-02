@@ -21,6 +21,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import Button, { LinkButton } from "@/components/ui/button";
 import { useColor } from "@/providers/theme-provider";
+import { Link } from "react-router-dom";
 
 const scheme = z.object({
   first_name: z.string().min(2, "First name must be at least 2 characters"),
@@ -177,19 +178,26 @@ export default function ScheduleDemoPage() {
                 />
                 <div className="action-buttons">
                   <Button type="submit" variant="primary">
-                    Log in
+                    Book a Demo
                   </Button>
                   <p>
                     Do you have an account?
-                    <LinkButton to="/login" variant="secondary" size="small">
+                    <LinkButton to="/login" variant="secondary" size="small" className="login-link">
                       {" "}
-                      Book a demo
+                      Login
                       <ArrowRightIcon className="arrow-left-action-icon" />
                     </LinkButton>
                   </p>
                 </div>
               </div>
-              <div className="privacy-policy-and-copyright"></div>
+              <div className="privacy-policy-and-copyright">
+                <div className="copyright">© UrbanEcho 2025</div>
+                <div className="privacy">
+                  <Link to="/privacy-policy">Privacy Policy</Link>
+
+                  <Link to="/terms-of-service">Terms of Service</Link>
+                </div>
+              </div>
             </ScheduleDemoForm>
           </Form>
         </RightSection>

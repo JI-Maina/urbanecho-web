@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   CheckCircleIcon,
   CircleIcon,
@@ -232,6 +232,7 @@ export default function NewPasswordPage() {
               $defaultColor={colors.requirementDefault}
               $metColor={colors.requirementMet}
               $iconPendingColor={colors.requirementIconPending}
+              $mustContainColor={colors.requirementMet}
             >
               <span className="requirements-heading">Must contain</span>
               <ul>
