@@ -8,7 +8,7 @@ import {
 import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
 import Button, { LinkButton } from "@/components/ui/button";
 import { useColor } from "@/providers/theme-provider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ScheduleDemoSuccess() {
   const options = [
@@ -18,9 +18,13 @@ export default function ScheduleDemoSuccess() {
   ];
 
   const colors = {
-   iconColor: useColor("content.content-brand"),
+    iconColor: useColor("content.content-brand"),
     headerColor: useColor("content.content-primary"),
     textColor: useColor("content.content-tertiary"),
+  };
+  const navigate = useNavigate();
+  const navigateToHome = () => {
+    navigate("/");
   };
   return (
     <ScheduleDemoMainPage>
@@ -28,7 +32,6 @@ export default function ScheduleDemoSuccess() {
         <LeftSection>
           <div className="orange-overlay"></div>
           <img src="/images/calendar_illustration.png" alt="" />
-          
         </LeftSection>
         <RightSection>
           <ScheduleWrapper
@@ -51,15 +54,20 @@ export default function ScheduleDemoSuccess() {
                 <ul>
                   {options.map((option, index) => (
                     <li key={index}>
-                      <CheckCircleIcon size={20} className="check-icon" /> {option}
+                      <CheckCircleIcon size={20} className="check-icon" />{" "}
+                      {option}
                     </li>
                   ))}
                 </ul>
               </div>
               <hr />
               <div className="action-buttons">
-                <Button type="submit" variant="primary">
-                  Book a Demo
+                <Button
+                  onClick={navigateToHome}
+                  type="button"
+                  variant="primary"
+                >
+                  Return to home
                 </Button>
                 <p>
                   <LinkButton
