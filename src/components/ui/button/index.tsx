@@ -83,6 +83,28 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           $disabledTextColor: disabledText,
         };
         break;
+      case 'ghost':
+        colors = {
+          $bgColor: 'transparent',
+          $textColor: primaryText,
+          $hoverBgColor: 'rgba(255, 255, 255, 0.1)',
+          $activeBgColor: 'rgba(255, 255, 255, 0.2)',
+          $focusRingColor: focusRing,
+          $disabledBgColor: disabledBg,
+          $disabledTextColor: disabledText,
+        };
+        break;
+      case 'link':
+        colors = {
+          $bgColor: 'transparent',
+          $textColor: primaryText,
+          $hoverBgColor: 'transparent',
+          $activeBgColor: 'transparent',
+          $focusRingColor: focusRing,
+          $disabledBgColor: 'transparent',
+          $disabledTextColor: disabledText,
+        };
+        break;
       default:
         colors = {
           $bgColor: primaryBg,

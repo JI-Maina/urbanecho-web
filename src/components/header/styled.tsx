@@ -24,12 +24,8 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: ${AppTheme.layout.breakpoints.tablet}) {
-    padding: ${AppTheme.spacing["16"]} ${AppTheme.layout.container.tablet.margin};
-  }
-
-  @media (max-width: ${AppTheme.layout.breakpoints.mobile}) {
-    padding: ${AppTheme.spacing["16"]} ${AppTheme.layout.container.mobile.margin};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    padding: ${({ theme }) => theme.spacing["16"]};
   }
 `;
 
@@ -37,15 +33,18 @@ export const HeaderContainer = styled.div`
 export const LeftSection = styled.div`
   display: flex;
   align-items: center;
+  flex: 1;
 `;
 
 // Middle section for navigation
 export const MiddleSection = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1;
 
   @media (max-width: 768px) {
-    display: none; // Hide on mobile, could add mobile menu later
+    display: none;
   }
 `;
 
@@ -53,7 +52,170 @@ export const MiddleSection = styled.div`
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: ${AppTheme.spacing["12"]};
+  flex: 1;
+
+  @media (max-width: 768px) {
+    gap: ${AppTheme.spacing["08"]};
+  }
+`;
+
+// Mobile menu button
+export const MobileMenuButton = styled.button<{
+  $textColor: string;
+}>`
+  display: none;
+  background: none;
+  border: none;
+  padding: ${AppTheme.spacing["08"]};
+  cursor: pointer;
+  color: ${({ $textColor }) => $textColor};
+  padding: ${AppTheme.spacing["08"]};
+  .menu-icon {
+    /* border: 1px solid ${({ $textColor }) => $textColor};
+    height: ${({ theme }) => theme.spacing["16"]};
+    width: ${({ theme }) => theme.spacing["16"]}; */
+  }
+  /* @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+`;
+
+// Mobile menu overlay
+export const MobileMenuOverlay = styled.div<{
+  $isOpen: boolean;
+  $bgColor: string;
+}>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${({ $bgColor }) => $bgColor};
+  z-index: 999;
+  transform: ${({ $isOpen }) =>
+    $isOpen ? "translateX(0)" : "translateX(-100%)"};
+  transition: transform 0.3s ease-in-out;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
+// Mobile menu content
+export const MobileMenuContent = styled.div`
+  padding: ${AppTheme.spacing["20"]} ${AppTheme.spacing["16"]};
+  height: 100vh;
+  overflow-y: auto;
+`;
+
+// Mobile menu header
+export const MobileMenuHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${AppTheme.spacing["24"]};
+`;
+
+// Mobile menu close button
+export const MobileMenuCloseButton = styled.button<{
+  $textColor: string;
+}>`
+  background: none;
+  border: none;
+  padding: ${AppTheme.spacing["08"]};
+  cursor: pointer;
+  color: ${({ $textColor }) => $textColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+// Mobile menu navigation
+export const MobileMenuNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: ${AppTheme.spacing["04"]};
+  margin-bottom: ${AppTheme.spacing["32"]};
+`;
+
+// Mobile menu link
+export const MobileMenuLink = styled(Link)<{
+  $textColor: string;
+  $activeColor: string;
+}>`
+  color: ${({ $textColor }) => $textColor};
+  text-decoration: none;
+  padding: ${AppTheme.spacing["16"]} 0;
+  ${AppTheme.typography.label["20/regular"]}
+  border-bottom: 1px solid transparent;
+
+  &.active {
+    color: ${({ $activeColor }) => $activeColor};
+  }
+`;
+
+// Mobile menu user section
+export const MobileMenuUserSection = styled.div<{
+  $borderColor: string;
+}>`
+  border-top: 1px solid ${({ $borderColor }) => $borderColor};
+  padding-top: ${AppTheme.spacing["20"]};
+`;
+
+// Mobile menu user info
+export const MobileMenuUserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${AppTheme.spacing["12"]};
+  margin-bottom: ${AppTheme.spacing["20"]};
+`;
+
+// Mobile menu actions
+export const MobileMenuActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${AppTheme.spacing["12"]};
+`;
+
+// Mobile menu theme toggle section
+export const MobileMenuThemeSection = styled.div<{
+  $borderColor: string;
+  $textColor: string;
+}>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: ${AppTheme.spacing["16"]} 0;
+  border-top: 1px solid ${({ $borderColor }) => $borderColor};
+  margin-top: ${AppTheme.spacing["20"]};
+  color: ${({ $textColor }) => $textColor};
+  .toggle-icons {
+    display: flex;
+    gap: ${({ theme }) => theme.spacing["12"]};
+    flex-direction: column;
+    .theme-icon {
+      height: 26.25px;
+      width: 26.25px;
+    }
+
+    button {
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: ${({ theme }) => theme.spacing["08"]};
+    }
+  }
+`;
+
+// Desktop only wrapper for user dropdown
+export const DesktopOnly = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const UserMenuButton = styled.button<{
@@ -183,7 +345,6 @@ export const DropdownFooterLink = styled(Link)<{
     text-decoration: underline;
   }
 `;
-
 
 // Styled navigation link
 export const NavLink = styled(Link)<{

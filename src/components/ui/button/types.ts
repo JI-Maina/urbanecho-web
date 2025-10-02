@@ -1,4 +1,4 @@
-export type ButtonVariant = 'primary' | 'secondary' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'ghost' | 'link';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonState = 'default' | 'hover' | 'focus' | 'active' | 'loading' | 'disabled';
 
