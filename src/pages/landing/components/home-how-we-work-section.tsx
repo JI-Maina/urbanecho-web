@@ -5,6 +5,7 @@ import {
   HowWeWorkStepCard,
   HowWeWorkStepCardDescription,
   HowWeWorkStepCardImage,
+  HowWeWorkStepCardNumber,
   HowWeWorkStepCardTitle,
   HowWeWorkStepLine,
   HowWeWorkStepNumber,
@@ -49,8 +50,15 @@ export default function HomeHowWeWorkSection() {
         {/* Cards */}
         <HowWeWorkStepsCardsContainer>
           <HowWeWorkStepCard>
+             <HowWeWorkStepCardNumber
+                color={stepNumberColor}
+                bgColor={stepNumberBgColor}
+              >
+                1
+              </HowWeWorkStepCardNumber>
             <HowWeWorkStepCardImage src="/images/brain_data.png" />
             <HomeWorkStepCardTextWrapper>
+             
               <HowWeWorkStepCardTitle color={cardTitleColor}>
                 Consultation & Scoping
               </HowWeWorkStepCardTitle>
@@ -61,6 +69,12 @@ export default function HomeHowWeWorkSection() {
             </HomeWorkStepCardTextWrapper>
           </HowWeWorkStepCard>
           <HowWeWorkStepCard>
+             <HowWeWorkStepCardNumber
+                color={stepNumberColor}
+                bgColor={stepNumberBgColor}
+              >
+                2
+              </HowWeWorkStepCardNumber>
             <HowWeWorkStepCardImage src="/images/city_digital_twin.png" />
             <HomeWorkStepCardTextWrapper>
               <HowWeWorkStepCardTitle color={cardTitleColor}>
@@ -73,6 +87,12 @@ export default function HomeHowWeWorkSection() {
             </HomeWorkStepCardTextWrapper>
           </HowWeWorkStepCard>
           <HowWeWorkStepCard>
+             <HowWeWorkStepCardNumber
+                color={stepNumberColor}
+                bgColor={stepNumberBgColor}
+              >
+                3
+              </HowWeWorkStepCardNumber>
             <HowWeWorkStepCardImage src="/images/Access_AI.png" />
             <HomeWorkStepCardTextWrapper>
               <HowWeWorkStepCardTitle color={cardTitleColor}>

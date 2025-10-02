@@ -1,5 +1,4 @@
 import Button from "@/components/ui/button";
-import AppTheme from "@/lib/theme";
 import styled from "styled-components";
 
 /**
@@ -14,6 +13,11 @@ export const HomeHeroSectionContentWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 64px;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    flex-direction: column-reverse;
+    padding: ${(props) =>
+      `${props.theme.spacing["16"]} ${props.theme.spacing["16"]} ${props.theme.spacing["40"]} ${props.theme.spacing["16"]}`};
+  }
 `;
 
 /**
@@ -26,44 +30,44 @@ export const HomeheroSectionLeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    width: 100%;
+  }
 `;
 export const HomeheroSectionLeftTopHeader = styled.h1`
-  ${AppTheme.typography.heading["56/medium"]}
-  
- 
+  ${({ theme }) => theme.typography.heading["56/medium"]}
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    ${({ theme }) => theme.typography.heading["32/medium"]}
+    text-align: center;
+  }
 `;
-export const HomeheroSectionLeftTopHeaderSpecialText = styled.span<{color:string}>`
-    color: ${(props) => props.color};
-    position: relative;
-    background-color: transparent;
-    text-shadow: ${(props) => `0 0 40px ${props.color}`};
-    margin-left: ${(props) => props.theme.spacing['16']};
-    /* &::before{
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        backdrop-filter: blur(10px);
-        opacity: 0.1;
-        z-index: 1;
-        height: 100%;
-        width: 100%;
-        box-shadow: 10px 10px 30px ${props => props.color} inset, 10px 10px 30px ${props => props.color};
-    } */
-    
-`
+export const HomeheroSectionLeftTopHeaderSpecialText = styled.span<{
+  color: string;
+}>`
+  color: ${(props) => props.color};
+  position: relative;
+  background-color: transparent;
+  text-shadow: ${(props) => `0 0 40px ${props.color}`};
+  margin-left: ${(props) => props.theme.spacing["16"]};
+`;
 export const HomeheroSectionLeftCtaContainer = styled.div`
-display: flex;
-gap: 24px;
+  display: flex;
+  gap: 24px;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const HomeheroSectionLeftCtaButton = styled(Button)<{
   variant: "primary" | "secondary";
 }>`
-width: 200px;
-padding: 1rem;
+  width: 200px;
+  padding: 1rem;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    width: 100%;
+    padding: ${({ theme }) => `${theme.spacing["16"]} ${theme.spacing["08"]}`};
+  }
 `;
 
 /**
@@ -75,10 +79,19 @@ export const HomeheroSectionRightContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    width: 100%;
+  }
 `;
 export const HomeheroSectionRightContainerImage = styled.img`
   height: 100%;
   /* width: 40.75rem;  */
   /* object-fit: cover; */
   object-position: center;
+
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    width: 100%;
+    /* height: 236px; */
+    object-fit: cover;
+  }
 `;

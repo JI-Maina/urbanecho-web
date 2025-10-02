@@ -2,21 +2,22 @@
  * @fileoverview styled components for HomeBenefitsSection
  */
 import Button from "@/components/ui/button";
-import AppTheme from "@/lib/theme";
 import styled from "styled-components";
 export const HomeBaseContainer = styled.div<{ bg: string }>`
   background-color: ${(props) => props.bg};
-  padding: ${({ theme }) => `0 ${theme.spacing[64]} `};
 `;
 
 export const HomeBenefitsSectionMainContainer = styled.div`
   width: 100%;
-  padding: ${({ theme }) => `${theme.spacing[64]} ${theme.spacing["128"]}`};
   display: flex;
   flex-direction: column;
   max-width: ${({ theme: { layout } }) => layout.container.desktop.maxWidth};
   gap: ${({ theme }) => theme.spacing[40]};
   margin: 0 auto;
+  padding: ${({ theme }) => `0 ${theme.spacing[64]} `};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    padding: ${({ theme }) => `${theme.spacing[40]} ${theme.spacing[16]}`};
+  }
 `;
 
 /**
@@ -31,15 +32,26 @@ export const HomeBenefitsSectionContainerHeading = styled.div`
   padding: ${({ theme }) => `${theme.spacing[80]} 0 ${theme.spacing[40]} 0`};
   text-align: center;
   align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    padding: ${({ theme }) => `${theme.spacing[40]} ${theme.spacing[16]}`};
+    max-width: 100%;
+  }
 `;
 
 export const HomeBenefitsSectionContainerH2 = styled.h2`
-  ${AppTheme.typography.heading["40/medium"]}
+  ${({ theme }) => theme.typography.heading["40/medium"]}
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    ${({ theme }) => theme.typography.heading["24/medium"]}
+  }
 `;
 
 export const HomeBenefitsSectionContainerCallToAction = styled(Button)`
   padding: ${({ theme }) => `${theme.spacing[14]} ${theme.spacing[16]}`};
   width: 156px;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    width: 100%;
+  }
 `;
 
 /**
@@ -54,8 +66,15 @@ export const BenefitCardsMainContainer = styled.div`
 export const BenefitCardContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing[64]};
-  &:nth-child(even) {
+  &:nth-child(odd) {
     flex-direction: row-reverse;
+  }
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing[40]};
+    &:nth-child(odd) {
+      flex-direction: column;
+    }
   }
 `;
 export const BenefitCardTextSection = styled.div`
@@ -65,17 +84,21 @@ export const BenefitCardTextSection = styled.div`
   justify-content: center;
   padding: ${({ theme }) => `${theme.spacing[40]} 0`};
   gap: ${({ theme }) => theme.spacing[16]};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    text-align: center;
+  }
 `;
+
 export const BenefitCardImgSection = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
 `;
 export const BenefitCardTitle = styled.h3`
-  ${AppTheme.typography.heading["32/medium"]}
+  ${({ theme }) => theme.typography.heading["32/medium"]}
 `;
 export const BenefitCardDescription = styled.p`
-  ${AppTheme.typography.heading["20/medium"]}
+  ${({ theme }) => theme.typography.paragraph["20/400"]}
 `;
 
 export const BenefitCardImage = styled.img`

@@ -44,13 +44,13 @@ const LogoList = () => {
   );
 };
 
-export default function CompanyLogosSection() {
+export default function CompanyLogosSection({showTitle = true}: {showTitle?: boolean}) {
   return (
     <MainCompanyLogosContainer
       bgColor={useColor("surface.surface-l0")}
     >
       <CompanyLogosContent headerColor={useColor("content.content-primary")}>
-        <h2>Our Partners</h2>
+        {showTitle && <h2>Our Partners</h2>}
         <LogoList />
       </CompanyLogosContent>
     </MainCompanyLogosContainer>

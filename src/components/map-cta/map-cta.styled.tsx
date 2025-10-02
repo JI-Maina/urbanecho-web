@@ -9,6 +9,9 @@ export const MapCtaMainContainer = styled.div<{ bg: string }>`
   height: 35rem; /** 560px */
   background: ${(props) => props.bg};
   position: relative;
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    height: 400px;
+  }
 `;
 
 export const MapCtaContentWrapper = styled.div<{ imgPath: string }>`
@@ -44,6 +47,11 @@ export const MapCtaHeading = styled.h2<{ color: string }>`
   color: ${(props) => props.color};
   max-width: 61.5rem; /** 984px */
   text-align: center;
+
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    ${({ theme }) => theme.typography.heading["32/medium"]}
+    max-width: 100%;
+  }
 `;
 
 export const MapCtaButton = styled(Button)<{
@@ -58,5 +66,8 @@ export const MapCtaButton = styled(Button)<{
   width: ${({ theme }) => theme.spacing["192"]};
   &:hover {
     background-color: ${(props) => props.hoverBg};
+  }
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    width: 100%;
   }
 `;

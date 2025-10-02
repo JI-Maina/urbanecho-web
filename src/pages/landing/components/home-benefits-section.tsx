@@ -32,6 +32,9 @@ export default function HomeBenefitsSection() {
         <BenefitCardsMainContainer>
           {/* ======== 001 ======= */}
           <BenefitCardContainer>
+            <BenefitCardImgSection>
+              <BenefitCardImage src="/images/full-frame-shot-city.jpg" />
+            </BenefitCardImgSection>
             <BenefitCardTextSection>
               <BenefitCardTitle>Digitise cities anywhere</BenefitCardTitle>
               <BenefitCardDescription>
@@ -39,12 +42,12 @@ export default function HomeBenefitsSection() {
                 cities anywhere.
               </BenefitCardDescription>
             </BenefitCardTextSection>
-            <BenefitCardImgSection>
-              <BenefitCardImage src="/images/full-frame-shot-city.jpg" />
-            </BenefitCardImgSection>
           </BenefitCardContainer>
           {/* ======== 002 ======= */}
           <BenefitCardContainer>
+            <BenefitCardImgSection>
+              <BenefitCardImage src="/images/data-overlay-confused-business-people-office-problem-solving-system-future-technology-hologram-man-women-working-together-programming-code-online-error-digital-agency.jpg" />
+            </BenefitCardImgSection>
             <BenefitCardTextSection>
               <BenefitCardTitle>
                 Ask in Plain Language, Get Answers
@@ -54,12 +57,12 @@ export default function HomeBenefitsSection() {
                 using plain language, no technical expertise required.
               </BenefitCardDescription>
             </BenefitCardTextSection>
-            <BenefitCardImgSection>
-              <BenefitCardImage src="/images/data-overlay-confused-business-people-office-problem-solving-system-future-technology-hologram-man-women-working-together-programming-code-online-error-digital-agency.jpg" />
-            </BenefitCardImgSection>
           </BenefitCardContainer>
           {/* ======== 003 ======= */}
-          <BenefitCardContainer>
+          <BenefitCardContainer> 
+            <BenefitCardImgSection>
+              <BenefitCardImage src="/images/demographic-census-concept-representation.jpg" />
+            </BenefitCardImgSection>
             <BenefitCardTextSection>
               <BenefitCardTitle>
                 Understand How Decisions Affect Real People
@@ -69,9 +72,7 @@ export default function HomeBenefitsSection() {
                 people in your digital twin.
               </BenefitCardDescription>
             </BenefitCardTextSection>
-            <BenefitCardImgSection>
-              <BenefitCardImage src="/images/demographic-census-concept-representation.jpg" />
-            </BenefitCardImgSection>
+           
           </BenefitCardContainer>
         </BenefitCardsMainContainer>
       </HomeBenefitsSectionMainContainer>

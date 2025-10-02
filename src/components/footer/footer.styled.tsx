@@ -23,11 +23,22 @@ export const FooterContentTop = styled.div<{
   justify-content: space-between;
   padding-top: ${({ theme }) => `${theme.spacing["160"]} `};
   color: ${(props) => props.textColor};
+
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    flex-direction: column;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing["64"]};
+    padding: ${({ theme }) =>
+      `${theme.spacing["64"]} ${theme.spacing["16"]} ${theme.spacing["80"]} ${theme.spacing["16"]}`};
+  }
   & > .logo-section {
     width: 320px;
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing[24]};
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      width: 100%;
+    }
     & > img {
       width: 160px;
       height: auto;
@@ -40,10 +51,19 @@ export const FooterContentTop = styled.div<{
     width: 632px;
     display: flex;
     justify-content: space-between;
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      width: 100%;
+      flex-wrap: wrap;
+    }
     & > div {
       display: flex;
       flex-direction: column;
       gap: ${({ theme }) => theme.spacing[32]};
+
+      @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+        width: 50%;
+        margin-bottom: ${({ theme }) => theme.spacing[32]};
+      }
     }
     & > div > h4 {
       ${({ theme }) => theme.typography.heading["14/medium"]}

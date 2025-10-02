@@ -1,14 +1,7 @@
-import { HomePartnersLogoMainContainer } from "./home-partners-logo.styled";
-import SecoComponent from "@/components/partners/seco-component";
-import EthZurichComponent from "@/components/partners/eth-zurich-component";
+import CompanyLogosSection from "@/pages/company/company-logos-section";
 
 export default function HomePartnersLogo() {
-  const components = [SecoComponent, EthZurichComponent];
   return (
-    <HomePartnersLogoMainContainer >
-      {Array.from([...components, ...components]).map((Component, index) => (
-        <Component key={index} />
-      ))}
-    </HomePartnersLogoMainContainer>
+   <CompanyLogosSection showTitle={false} />
   );
 }
