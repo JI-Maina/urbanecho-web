@@ -9,6 +9,11 @@ export const ScheduleDemoContainer = styled.div`
   justify-content: space-between;
   gap: ${(props) => props.theme.spacing["64"]};
   padding: ${({ theme }) => ` ${theme.spacing["16"]} ${theme.spacing["08"]}`};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    display: block;
+    padding: ${({ theme }) =>
+      ` ${theme.spacing["40"]} ${theme.spacing["16"]} `};
+  }
 `;
 
 export const LeftSection = styled.div`
@@ -18,6 +23,9 @@ export const LeftSection = styled.div`
   position: relative;
   overflow: hidden;
   padding: ${(props) => props.theme.spacing["64"]};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    display: none;
+  }
   & .orange-overlay {
     height: 660px;
     width: 660px;
@@ -90,6 +98,9 @@ export const ScheduleDemoForm = styled.form<{
     flex-direction: column;
     gap: ${(props) => props.theme.spacing["16"]};
     justify-content: space-between;
+    @media (max-width: ${({ theme: { layout: { container } } }) => container.tablet.maxWidth}) {
+      gap: ${(props) => props.theme.spacing["40"]};
+    }
     & [data-slot="form-item"] {
       display: flex;
       flex-direction: column;
@@ -157,6 +168,9 @@ export const ScheduleDemoForm = styled.form<{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: ${(props) => props.theme.spacing["16"]};
+    @media (max-width: ${({ theme: { layout: { container } } }) => container.tablet.maxWidth}) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .action-buttons {
@@ -193,6 +207,9 @@ export const ScheduleDemoForm = styled.form<{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: ${({ theme: { layout: { container } } }) => container.tablet.maxWidth}) {
+      margin-top: ${(props) => props.theme.spacing["32"]};
+    }
     & .copyright {
     }
     & .privacy {

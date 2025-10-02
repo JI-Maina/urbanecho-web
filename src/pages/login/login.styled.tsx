@@ -27,6 +27,10 @@ export const LoginFormLeftSection = styled.div<{
   display: flex;
   justify-content: center;
   padding: ${(props) => props.theme.spacing["48"]};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    display: none;
+    width: 100%;
+  }
   & h2 {
     ${(props) => props.theme.typography.heading["40/medium"]}
     text-align: center;
@@ -62,6 +66,10 @@ export const LoginFormOrangeOverlay = styled.div`
 export const LoginFormRightSection = styled.div`
   width: 752px;
   margin-top: ${(props) => props.theme.spacing["48"]};
+  @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+    width: 100%;
+    margin-top: ${(props) => props.theme.spacing["04"]};
+  }
 `;
 export const LoginForm = styled.form<{
   $footerTextColor: string;
@@ -77,16 +85,25 @@ export const LoginForm = styled.form<{
   grid-template-columns: 1fr;
   grid-template-rows: auto ${(props) => props.theme.spacing["32"]};
   height: 100%;
-
+@media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: ${(props) => props.theme.spacing["32"]};
+}
   .form-wrapper {
     max-width: 420px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: ${(props) => props.theme.spacing["40"]};
-    /* padding-bottom: ${(props) => props.theme.spacing["32"]}; */
-    /* border-bottom: 1px solid ${(props) => props.$footerTextColor}; */
-    /* margin-bottom: ${(props) => props.theme.spacing["32"]}; */
+
+    @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+      max-width: 100%;
+      width: 100%;
+      padding: 0 ${({ theme }) => theme.spacing["16"]};
+    }
     .header-section {
       display: flex;
       flex-direction: column;
@@ -94,6 +111,9 @@ export const LoginForm = styled.form<{
       text-align: center;
       h2 {
         ${(props) => props.theme.typography.heading["32/medium"]}
+        @media (max-width: ${({ theme }) => theme.layout.container.tablet.maxWidth}) {
+          ${({ theme }) => theme.typography.heading["24/medium"]}
+        }
       }
       p {
         ${(props) => props.theme.typography.paragraph["16/400"]}
