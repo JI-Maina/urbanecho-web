@@ -41,7 +41,7 @@ const quickLinks: Record<QuickLinkCategory, QuickLink[]> = {
     {
       type: "email",
       label: "Email Us",
-      href: "mailto:info@urbanecho.com",
+      href: "mailto:info@urbanecho.io",
     },
     {
       type: "external-link",
